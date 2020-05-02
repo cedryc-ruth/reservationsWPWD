@@ -8,8 +8,8 @@
 
     <p>{{ artist }}</p>
     
-    {% for type in artist.types  %}
-        <li>{{ type }}</li>
+    {% for artistType in artist.ArtistTypes  %}
+        <li>{{ artistType.type }}</li>
     {% endfor %}
 </div>
 {% endblock %}

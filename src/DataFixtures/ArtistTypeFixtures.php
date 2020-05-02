@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use App\Entity\ArtistType;
 
 class ArtistTypeFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -115,12 +116,13 @@ class ArtistTypeFixtures extends Fixture implements DependentFixtureInterface
 
         foreach($artistTypes as $record) {
             $artist = $this->getReference($record['artist_firstname'].'-'.$record['artist_lastname']);
-            
             $type = $this->getReference($record['type']);
             
-            $artist->addType($type);
+            $artistType = new ArtistType();
+            $artistType->setArtist($artist);
+            $artistType->setType($type);          
             
-            $manager->persist($artist); 
+            $manager->persist($artistType); 
         }
         
         $manager->flush();
