@@ -4,6 +4,13 @@
 
 {% block body %}
 <div class="example-wrapper">
-    <p>{{ type.type|capitalize }}</p>
+    <h1>{{ type.type|capitalize }}</h1>
+    
+    <h2>Liste des artistes</h2>
+    <ul>
+    {% for artist in type.artists %}
+        <li>{{ artist }}</li>
+    {% endfor %}
+    </ul>
 </div>
 {% endblock %}

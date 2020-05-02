@@ -7,5 +7,9 @@
     <h1>{{ titre }}</h1>
 
     <p>{{ artist }}</p>
+    
+    {% for type in artist.types  %}
+        <li>{{ type }}</li>
+    {% endfor %}
 </div>
 {% endblock %}
