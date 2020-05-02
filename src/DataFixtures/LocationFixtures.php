@@ -14,52 +14,52 @@ class LocationFixtures extends Fixture implements DependentFixtureInterface
     {
         $locations = [
             [
-                'slug' => null,
-                'designation' => 'Espace Delvaux / La vénerie',
-                'address' => '3 rue Gratès',
-                'locality' => 'Watermael-Boitsfort',
-                'website' => 'https://www.lavenerie.be',
-                'phone' => '+32 (0)2/663.85.50',
+                'slug'=>null,
+                'designation'=>'Espace Delvaux / La Vénerie',
+                'address'=>'3 rue Gratès',
+                'locality'=>'Watermael-Boitsfort',
+                'website'=>'https://www.lavenerie.be',
+                'phone'=>'+32 (0)2/663.85.50',
             ],
             [
-                'slug' => null,
-                'designation' => 'Dexia Art Center',
-                'address' => '50 rue de l\'Ecuyer',
-                'locality' => 'Bruxelles',
-                'website' => null,
-                'phone' => null,
+                'slug'=>null,
+                'designation'=>'Dexia Art Center',
+                'address'=>'50 rue de l\'Ecuyer',
+                'locality' =>'Bruxelles',
+                'website'=>null,
+                'phone'=>null,
             ],
             [
-                'slug' => null,
-                'designation' => 'La Samaritaine',
-                'address' => '16 rue de la samaritaine',
-                'locality' => 'Bruxelles',
-                'website' => 'https://www.lasamaritaine.be',
-                'phone' => null,
+                'slug'=>null,
+                'designation'=>'La Samaritaine',
+                'address'=>'16 rue de la samaritaine',
+                'locality'=>'Bruxelles',
+                'website'=>'http://www.lasamaritaine.be/',
+                'phone'=>null,
             ],
             [
-                'slug' => null,
-                'designation' => 'Espace Magh',
-                'address' => '17 rue du Poinçon',
-                'locality' => 'Bruxelles',
-                'website' => 'http://www.espacemagh.be',
-                'phone' => null,
+                'slug'=>null,
+                'designation'=>'Espace Magh',
+                'address'=>'17 rue du Poinçon',
+                'locality'=>'Bruxelles',
+                'website'=>'http://www.espacemagh.be',
+                'phone'=>'+32 (0)2/274.05.10',
             ],
         ];
         
-        foreach($locations as $data) {
+        foreach ($locations as $record) {
             $slugify = new Slugify();
-            $location_slug = $slugify->slugify($data['designation']);
             
             $location = new Location();
-            $location->setSlug($location_slug);
-            $location->setDesignation($data['designation']);
-            $location->setAddress($data['address']);
-            $location->setLocality($this->getReference($data['locality']));
-            $location->setWebsite($data['website']);
-            $location->setPhone($data['phone']);
-                        
+            $location->setSlug($slugify->slugify($record['designation']));
+            $location->setDesignation($record['designation']);
+            $location->setAddress($record['address']);
+            $location->setLocality($this->getReference($record['locality']));
+            $location->setWebsite($record['website']);
+            $location->setPhone($record['phone']);
             $manager->persist($location);
+            
+            $this->addReference($location->getSlug(), $location);
         }
 
         $manager->flush();
