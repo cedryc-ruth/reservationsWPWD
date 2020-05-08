@@ -204,8 +204,8 @@ class Show
 
     public function addArtistType(ArtistType $artistType): self
     {
-        if (!$this->artistType->contains($artistType)) {
-            $this->artistType[] = $artistType;
+        if (!$this->artistTypes->contains($artistType)) {
+            $this->artistTypes[] = $artistType;
         }
 
         return $this;
@@ -213,8 +213,8 @@ class Show
 
     public function removeArtistType(ArtistType $artistType): self
     {
-        if ($this->artistType->contains($artistType)) {
-            $this->artistType->removeElement($artistType);
+        if ($this->artistTypes->contains($artistType)) {
+            $this->artistTypes->removeElement($artistType);
         }
 
         return $this;
