@@ -63,6 +63,11 @@ class Show
      */
     private $representations;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ArtistType", inversedBy="shows")
+     */
+    private $artistTypes;
+
     public function __construct()
     {
         $this->representations = new ArrayCollection();
@@ -184,6 +189,32 @@ class Show
             if ($representation->getTheShow() === $this) {
                 $representation->setTheShow(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ArtistType[]
+     */
+    public function getArtistTypes(): Collection
+    {
+        return $this->artistTypes;
+    }
+
+    public function addArtistType(ArtistType $artistType): self
+    {
+        if (!$this->artistType->contains($artistType)) {
+            $this->artistType[] = $artistType;
+        }
+
+        return $this;
+    }
+
+    public function removeArtistType(ArtistType $artistType): self
+    {
+        if ($this->artistType->contains($artistType)) {
+            $this->artistType->removeElement($artistType);
         }
 
         return $this;

@@ -35,4 +35,19 @@
         <p>Aucune représentation</p>
         {% endif %}
         
+         <h2>Liste des artistes</h2>
+        {% if collaborateurs|length>=1 %}
+        
+        {% for key in collaborateurs|keys %}
+        <p>{{ key|capitalize }}: 
+            {% for value in collaborateurs[key] %}
+                {{ value }}{% if loop.index == loop.length-1 %} et 
+            {% elseif not loop.last %}, {% endif %}           
+            {% endfor %}
+        </p>
+        {% endfor %}
+        {% else %}
+        <p>Aucun artiste</p>
+        {% endif %}
+        
 {% endblock %}
