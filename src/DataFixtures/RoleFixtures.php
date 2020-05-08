@@ -20,6 +20,8 @@ class RoleFixtures extends Fixture
             $role = new Role();
             $role->setRole($data['role']);
             
+            $this->addReference($data['role'],$role);
+            
             $manager->persist($role);
         }
 
