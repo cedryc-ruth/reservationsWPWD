@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+    <h1>Reservation index</h1>
+
+    <ul>
+        {% for groups in reservations %}
+            <li>
+                <ul>{{ groups.0.user.firstname }} {{ groups.0.user.lastname }}
+                {% for reservation in groups %}
+                    <li>
+                        <span class="alert alert-primary">{{ reservation.representation.theShow.title }}</span> ({{ reservation.places }} places)
+                        <a href="{{ path('reservation_show', {'id': reservation.id}) }}">show</a>
+                        <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">edit</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </li>
+        {% else %}
+            <li>no records found</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('reservation_new') }}">Create new</a>
+{% endblock %}
