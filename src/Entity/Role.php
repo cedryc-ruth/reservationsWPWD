@@ -38,4 +38,8 @@ class Role
 
         return $this;
     }
+    
+    public function __toString() {
+        return 'ROLE_USER';//$this->role;       //ROLE_USER 
+    }
 }
