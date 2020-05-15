@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -24,6 +26,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\Length(max=30, maxMessage="Pas plus de 30 caractères!")
      */
     private $login;
 
@@ -157,7 +160,7 @@ class User implements UserInterface
         foreach($this->roles as $role) {
             $roles[] = $role->getRole();
         }
-        
+
         $roles[] = 'ROLE_USER';
         
         return array_unique($roles);
