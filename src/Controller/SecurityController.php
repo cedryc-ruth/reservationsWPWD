@@ -58,20 +58,24 @@ class SecurityController extends AbstractController
         
         $title = 'Inscription';
         $user = new User();
-        $repository = $this->getDoctrine()->getRepository(Role::class);
-        $roleMember = $repository->findOneBy(['role'=>'member']);
-        $user->addRole($roleMember);
+        //$repository = $this->getDoctrine()->getRepository(Role::class);
+        //$roleMember = $repository->findOneBy(['role'=>'member']);
+        //$user->addRole($roleMember);
         
         $errors = [];
         $form = $this->createForm(UserType::class,$user);
-        //$form->remove('roles');
+        //$form->remove('roles');       //En réalité on devrait pas pouvoir choisir
         $form->remove('password');
+
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
             //Association des champs de formulaire avec l'entité (patch)
             $user = $form->getData();
             $user->setPassword($form->get('plainPassword')->getData());
+            
+            $userRole = $form->get('user_role')->getData();
+            $user->addRole($userRole);
 
             //Validation par rapport aux contraintes de l'entité
             $errors = $validator->validate($user);

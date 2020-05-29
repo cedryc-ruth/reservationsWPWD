@@ -3,6 +3,9 @@
 {% block title %}Fiche d'un spectacle{% endblock %}
 
 {% block body %}
+    <div class="alert alert-primary">
+        {{ notification }}
+    </div>
     <article>
         <h1>{{ show.title }}</h1>
 
@@ -28,7 +31,17 @@
         {% if show.representations|length>=1 %}
         <ul>
             {% for representation in show.representations %}
-                <li>{{ representation.schedule|date('d/m/Y G:i:s') }}</li>              
+                <li>
+                    {{ representation.schedule|date('d/m/Y G:i:s') }}
+                    <form action="{{ path('show_show',{'id':show.id}) }}" method="post">
+                        <input type="number" id="reservation_places" name="reservation[places]">
+                        <input type="hidden" id="reservation_representation" name="reservation[representation]" 
+                               value="{{ representation.id }}">
+                        <input type="hidden" id="reservation__token" name="reservation[_token]" 
+                               value="{{ csrf_token('reservation') }}">
+                        <button class="btn btn-primary">Réserver</button>
+                    </form>
+                </li>              
             {% endfor %}
         </ul>
         {% else %}

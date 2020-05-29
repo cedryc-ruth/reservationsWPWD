@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+    <h1>Reservation</h1>
+    <strong>TODO intégrer STRIPE ICI</strong>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation.id }}</td>
+            </tr>
+            <tr>
+                <th>Spectacle</th>
+                <td>{{ reservation.representation.theShow.title }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ reservation.representation.schedule|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Heure</th>
+                <td>{{ reservation.representation.schedule|date('H:i') }}</td>
+            </tr>
+            <tr>
+                <th>Places</th>
+                <td>{{ reservation.places }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('reservation_index') }}">back to list</a>
+
+{% endblock %}

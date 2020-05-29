@@ -98,4 +98,24 @@ class ReservationController extends AbstractController
 
         return $this->redirectToRoute('reservation_index');
     }
+    
+    /**
+     * @Route("/pay", name="reservation_pay")
+     */
+    public function pay(Request $request): Response {
+        //Payer
+           dump($reservation);die;
+        if(false) {
+            //Persistance des données
+            $manager = $this->getdoctrine()->getManager();
+            $manager->persist($reservation);
+            $manager->flush();
+
+            //Redirection ou pas
+            $notification = "Votre réservation a bien été enregistrée. Merci!";
+        } else {
+            $notification = "Votre paiement a été refusé!";
+        }
+
+    }
 }

@@ -40,10 +40,11 @@ class UserType extends AbstractType
                     'Anglais' => 'en',
                 ]
             ])
-            ->add('roles', EntityType::class, [
+            ->add('user_role', EntityType::class, [
                 'class' => Role::class,
                 'choice_label' => 'Role',
                 'label' => 'Role',
+                'mapped' => false,
             ])
             ->add('password',PasswordType::class)
             ->add('plainPassword', RepeatedType::class, [
