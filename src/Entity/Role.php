@@ -21,6 +21,11 @@ class Role
      * @ORM\Column(type="string", length=30)
      */
     private $role;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="roles")
+     */
+    private $users;
 
     public function getId(): ?int
     {

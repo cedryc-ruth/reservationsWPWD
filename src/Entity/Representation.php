@@ -120,4 +120,10 @@ class Representation
 
         return $this;
     }
+    
+    public function __toString() {
+        return $this->the_show->getTitle() .' - '
+                . $this->schedule->format('d/m/Y') .' - '
+                .(!empty($this->the_location) ? $this->the_location->getDesignation():'');
+    }
 }
