@@ -11,5 +11,11 @@
     {% for artistType in artist.ArtistTypes  %}
         <li>{{ artistType.type }}</li>
     {% endfor %}
+    
+    <p>Artiste géré par {{ artist.agent.name|capitalize }} ({{ artist.agent.email }})</p>
+    
+{% if 'admin' in app.user.roles %}    
+    <p><a href="{{ path('agent_transfert',{'id':artist.agent.id, 'artistId':artist.id}) }}">Demander un transfert</a></p>
+{% endif %}
 </div>
 {% endblock %}

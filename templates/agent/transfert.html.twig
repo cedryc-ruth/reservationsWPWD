@@ -1,0 +1,6 @@
+<h2>Transfert de <em>{{ artist.firstname }} {{ artist.lastname }}</em></h2>
+<p>Veuillez sélectionner l'agent vers lequel cet artiste doit être transférer</p>
+{{ form_start(formTransfert) }}
+    {{ form_widget(formTransfert) }}
+    <button class="btn">{{ button_label|default('Transférer') }}</button>
+{{ form_end(formTransfert) }}
